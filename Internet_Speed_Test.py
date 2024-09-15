@@ -1,5 +1,6 @@
 import tkinter as tk
 import speedtest
+import os
 
 class Speed_Test:
     def download_speed(self):
@@ -28,7 +29,8 @@ class Speed_Test:
 class TASK_BAR_IMAGE(Speed_Test):
     def __init__(self, parent,box_image_instance):
         super().__init__()
-        self.boximg = tk.PhotoImage(file="taskbar_1_.png")
+        self.taskbar_path = os.path.join(os.path.dirname(__file__), 'taskbar_1_.png')        
+        self.boximg = tk.PhotoImage(file=self.taskbar_path)
         self.boxlabel = tk.Label(parent, image=self.boximg, background="gray5")
         self.boxlabel.place(x=0, y=0)
         # ping:
@@ -63,8 +65,8 @@ class TASK_BAR_IMAGE(Speed_Test):
 class BOX_IMAGE():
     def __init__(self, parent):
         super().__init__()
-
-        self.task_img = tk.PhotoImage(file="blue_box.png")
+        self.task_path = os.path.join(os.path.dirname(__file__), 'blue_box.png')   
+        self.task_img = tk.PhotoImage(file=self.task_path)
         self.task_image_label = tk.Label(parent, image=self.task_img, background="gray5")
         self.task_image_label.place(x=0, y=170)
 
@@ -78,8 +80,8 @@ class BOX_IMAGE():
 class BLUE_BUTTON:
     def __init__(self, parent, task_bar_instance):
         super().__init__()
-
-        self.button_img = tk.PhotoImage(file="blue_button.png")
+        self.button_img_path = os.path.join(os.path.dirname(__file__), 'blue_button.png')  
+        self.button_img = tk.PhotoImage(file=self.button_img_path)
         self.button = tk.Button(parent, image=self.button_img, background="gray5", activebackground="gray5", bd=0, cursor="hand2", command= task_bar_instance.speed_check)
         self.button.place(x=80, y=535)
 
@@ -89,7 +91,8 @@ class APP(tk.Tk):
         super().__init__()
         self.geometry("365x630")
         self.resizable(False, False)
-        self.wm_iconbitmap("net_speed_icon.ico")
+        self.icon_path = os.path.join(os.path.dirname(__file__), 'net_speed_icon.ico') 
+        self.wm_iconbitmap(self.icon_path)
         self.title("Internet Speed Test")
         self.config(background="gray5")
         self.app_photo = BOX_IMAGE(self)
